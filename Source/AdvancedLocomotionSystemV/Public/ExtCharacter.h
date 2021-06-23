@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "ExtCharacterMovementComponent.h"
 #include "GameFramework/Character.h"
 #include "ExtCharacter.generated.h"
 
@@ -15,9 +17,29 @@ public:
 	// Sets default values for this character's properties
 	AExtCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
+	virtual void PostInitializeComponents() override;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+// 	/** The main skeletal mesh associated with this Character (optional sub-object). */
+// 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
+// 	USkeletalMeshComponent* Mesh;
+//
+	/** Movement component used for movement logic in various movement modes (walking, falling, etc), containing relevant settings and functions to control movement. */
+	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
+	UExtCharacterMovementComponent* ExtCharacterMovement;
+//
+// 	/** The CapsuleComponent being used for movement collision (by CharacterMovement). Always treated as being vertically aligned in simple collision check functions. */
+// 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
+// 	UCapsuleComponent* CapsuleComponent;
+//
+// #if WITH_EDITORONLY_DATA
+// 	/** Component shown in the editor only to indicate character facing */
+// 	UPROPERTY()
+// 	UArrowComponent* ArrowComponent;
+// #endif
 
 public:
 	// Called every frame
