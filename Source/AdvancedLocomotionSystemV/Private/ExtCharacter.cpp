@@ -142,3 +142,7 @@ void AExtCharacter::PostInitializeComponents()
 	ExtCharacterMovement = Cast<UExtCharacterMovementComponent>(GetCharacterMovement());
 }
 
+bool AExtCharacter::CanJump() const
+{
+	return CanJumpInternal() || ExtCharacterMovement->IsWallJump;
+}

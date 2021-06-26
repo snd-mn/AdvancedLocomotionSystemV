@@ -24,7 +24,11 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTimerHandle WallJumpResetTimerHandle;
 
-	bool DoJump(bool bReplayingMoves) override;
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool DoWallJump(bool bReplayingMoves);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ResetWallJump();
 	
 	
 };

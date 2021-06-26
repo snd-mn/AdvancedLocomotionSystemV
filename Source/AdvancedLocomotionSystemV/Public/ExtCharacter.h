@@ -57,6 +57,9 @@ public:
 	/** Name of the CapsuleComponent. */
 	static FName CapsuleComponentName;
 
+	// UFUNCTION(BlueprintCallable, Category=Character)
+	bool CanJump() const;
+
 private:
 	// /** The main skeletal mesh associated with this Character (optional sub-object). */
 	// UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
