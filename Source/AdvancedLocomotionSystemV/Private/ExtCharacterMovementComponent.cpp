@@ -31,7 +31,7 @@ void UExtCharacterMovementComponent::ReactOnCharacterLandedDelegate(const FHitRe
 bool UExtCharacterMovementComponent::DoWallJump_Implementation(bool bReplayingMoves)
 {
 	UE_LOG(LogTemp, Warning, TEXT("CharacterOwner: %i, IsWallJump %i"), CharacterOwner, IsWallJump)
-	if (CharacterOwner && IsWallJump && CurrentCountWallJumps <= MaxCountWallJumps)
+	if (CharacterOwner && IsWallJump && CurrentCountWallJumps < MaxCountWallJumps)
 	{
 		// Don't jump if we can't move up/down.
   		if (!bConstrainToPlane || FMath::Abs(PlaneConstraintNormal.Z) != 1.f)
