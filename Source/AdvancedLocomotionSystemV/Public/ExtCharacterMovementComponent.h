@@ -15,6 +15,11 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	GENERATED_BODY()
 
 	public:
+
+	UExtCharacterMovementComponent(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+	virtual void SetUpdatedComponent(USceneComponent* NewUpdatedComponent) override;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool IsWallJump;
 
@@ -29,6 +34,13 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ResetWallJump();
-	
-	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int32 MaxCountWallJumps = 3;
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 CurrentCountWallJumps = 0; 
+
+	UFUNCTION()
+	void ReactOnCharacterLandedDelegate(const FHitResult& Hit);
 };
