@@ -23,23 +23,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-// 	/** The main skeletal mesh associated with this Character (optional sub-object). */
-// 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
-// 	USkeletalMeshComponent* Mesh;
-//
 	/** Movement component used for movement logic in various movement modes (walking, falling, etc), containing relevant settings and functions to control movement. */
 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	UExtCharacterMovementComponent* ExtCharacterMovement;
-//
-// 	/** The CapsuleComponent being used for movement collision (by CharacterMovement). Always treated as being vertically aligned in simple collision check functions. */
-// 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
-// 	UCapsuleComponent* CapsuleComponent;
-//
-// #if WITH_EDITORONLY_DATA
-// 	/** Component shown in the editor only to indicate character facing */
-// 	UPROPERTY()
-// 	UArrowComponent* ArrowComponent;
-// #endif
 
 public:
 	// Called every frame
@@ -57,25 +43,12 @@ public:
 	/** Name of the CapsuleComponent. */
 	static FName CapsuleComponentName;
 
-	// UFUNCTION(BlueprintCallable, Category=Character)
-	bool CanJump() const;
+	// // UFUNCTION(BlueprintCallable, Category=Character)
+	// bool CanJump() const;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	FVector GetJumpVector();
 
 private:
-	// /** The main skeletal mesh associated with this Character (optional sub-object). */
-	// UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
-	// USkeletalMeshComponent* Mesh;
-	//
-	// /** Movement component used for movement logic in various movement modes (walking, falling, etc), containing relevant settings and functions to control movement. */
-	// UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
-	// UCharacterMovementComponent* CharacterMovement;
-	//
-	// /** The CapsuleComponent being used for movement collision (by CharacterMovement). Always treated as being vertically aligned in simple collision check functions. */
-	// UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
-	// UCapsuleComponent* CapsuleComponent;
 
-// #if WITH_EDITORONLY_DATA
-// 	/** Component shown in the editor only to indicate character facing */
-// 	UPROPERTY()
-// 	UArrowComponent* ArrowComponent;
-// #endif
 };

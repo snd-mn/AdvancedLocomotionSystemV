@@ -23,8 +23,9 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool IsWallJump;
 
+	//The world normal ob the wall to jump off
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector WallJumpForwardVector;
+	FVector WallNormal;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTimerHandle WallJumpResetTimerHandle;
@@ -38,9 +39,26 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 MaxCountWallJumps = 3;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 CurrentCountWallJumps = 0; 
 
 	UFUNCTION()
 	void ReactOnCharacterLandedDelegate(const FHitResult& Hit);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	FVector GetJumpVector();
+
+	//TODO just positiv number by blueprint plz
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DotAngleForRightAngleJumps = 0.3f;
+	UPROPERTY()
+	float DotAngleForRightAngleJumpsNeg;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float ReflectWithYaw = 45.0f;
+	UPROPERTY()
+	FRotator leftRotator;
+	UPROPERTY()
+	FRotator rightRotator;
+	
 };

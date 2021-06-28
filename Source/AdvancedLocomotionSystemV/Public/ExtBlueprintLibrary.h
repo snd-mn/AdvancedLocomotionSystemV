@@ -6,10 +6,10 @@
 #include "GameFramework/Actor.h"
 #include "Kismet/GameplayStaticsTypes.h"
 
-#include "DummyActor.generated.h"
+#include "ExtBlueprintLibrary.generated.h"
 
 UCLASS()
-class ADVANCEDLOCOMOTIONSYSTEMV_API UDummyActor : public UBlueprintFunctionLibrary
+class ADVANCEDLOCOMOTIONSYSTEMV_API UExtBlueprintLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	

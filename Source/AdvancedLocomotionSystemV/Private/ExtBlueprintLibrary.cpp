@@ -1,32 +1,9 @@
-#include "DummyActor.h"
+#include "ExtBlueprintLibrary.h"
 
 #include "DrawDebugHelpers.h"
 
-
-// // Sets default values
-// UDummyActor::UDummyActor()
-// {
-//  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-// 	// PrimaryActorTick.bCanEverTick = true;
-//
-// }
-
-// // Called when the game starts or when spawned
-// void ADummyActor::BeginPlay()
-// {
-// 	Super::BeginPlay();
-// 	
-// }
-//
-// // Called every frame
-// void ADummyActor::Tick(float DeltaTime)
-// {
-// 	Super::Tick(DeltaTime);
-//
-// }
-
 // note: this will automatically fall back to line test if radius is small enough
-bool UDummyActor::PredictProjectilePathForCapsule(const UObject* WorldContextObject, const FPredictProjectilePathParams& PredictParams, FPredictProjectilePathResult& PredictResult, float CapsuleHalfHeight, float CapsuleRadius)
+bool UExtBlueprintLibrary::PredictProjectilePathForCapsule(const UObject* WorldContextObject, const FPredictProjectilePathParams& PredictParams, FPredictProjectilePathResult& PredictResult, float CapsuleHalfHeight, float CapsuleRadius)
 {
 	PredictResult.Reset();
 	bool bBlockingHit = false;
@@ -123,16 +100,14 @@ bool UDummyActor::PredictProjectilePathForCapsule(const UObject* WorldContextObj
 			for (const FPredictProjectilePathPointData& PathPt : PredictResult.PathData)
 			{
 				DrawDebugCapsule(World,PathPt.Location, CapsuleHalfHeight, CapsuleRadius, FQuat::Identity, FColor::Green, bPersistent, LifeTime, 2.0f);
-				// ::DrawDebugSphere(World, PathPt.Location, DrawRadius, 12, FColor::Green, bPersistent, LifeTime);
 			}
 			// draw the impact point
 			if (bBlockingHit)
 			{
-				// ::DrawDebugSphere(World, PredictResult.HitResult.Location, DrawRadius + 1.0f, 12, FColor::Red, bPersistent, LifeTime);
 				DrawDebugCapsule(World, PredictResult.HitResult.Location, CapsuleHalfHeight, CapsuleRadius, FQuat::Identity, FColor::Red, bPersistent, LifeTime, 2.0f);
 			}
 		}
-#endif //ENABLE_DRAW_DEBUG
+#endif ENABLE_DRAW_DEBUG
 	}
 
 	return bBlockingHit;
