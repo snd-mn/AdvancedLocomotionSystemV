@@ -54,6 +54,7 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	UPROPERTY()
 	float DotAngleForRightAngleJumpsNeg;
 	
+	//TODO use the rotator instead and add a vector for the amount of velocity which should be added in this direction
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float ReflectWithYaw = 45.0f;
 	UPROPERTY()

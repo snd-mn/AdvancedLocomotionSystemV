@@ -29,7 +29,6 @@ void UExtCharacterMovementComponent::SetUpdatedComponent(USceneComponent* NewUpd
 
 void UExtCharacterMovementComponent::ReactOnCharacterLandedDelegate(const FHitResult& Hit)
 {
-	UE_LOG(LogTemp,Warning,TEXT("UExtCharacterMovementComponent::ReactOnCharacterLandedDelegate"))
 	CurrentCountWallJumps  = 0;
 }
 
