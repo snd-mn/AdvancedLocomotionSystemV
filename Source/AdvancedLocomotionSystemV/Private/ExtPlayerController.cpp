@@ -23,10 +23,11 @@ void AExtPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	if(ExtCharacter->ExtCharacterMovement->IsWallJump)
+	if(ExtCharacter->ExtCharacterMovement->IsWallJumping)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Got walljump in AExtPlayerController"))
-		OnTickWhileInWalljumpSate();
+		//Todo impl the rotation lerp there for the controller rotation.
+		OnTickWhileInWalljumpSate(DeltaTime);
 	}
 	
 }

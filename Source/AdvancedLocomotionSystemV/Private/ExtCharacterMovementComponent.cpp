@@ -3,9 +3,11 @@
 
 #include "ExtCharacterMovementComponent.h"
 
+#include "ExtBlueprintLibrary.h"
 #include "GameFramework/Character.h"
 
 #include "ExtCharacter.h"
+#include "Components/CapsuleComponent.h"
 
 UExtCharacterMovementComponent::UExtCharacterMovementComponent(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
@@ -30,6 +32,8 @@ void UExtCharacterMovementComponent::SetUpdatedComponent(USceneComponent* NewUpd
 void UExtCharacterMovementComponent::ReactOnCharacterLandedDelegate(const FHitResult& Hit)
 {
 	CurrentCountWallJumps  = 0;
+	WallJumpDuration = 0.0f;
+	IsWallJumping = false;
 }
 
 bool UExtCharacterMovementComponent::DoWallJump_Implementation(bool bReplayingMoves)
@@ -50,6 +54,36 @@ bool UExtCharacterMovementComponent::DoWallJump_Implementation(bool bReplayingMo
             SetMovementMode(MOVE_Falling);
 			ResetWallJump_Implementation();
   			CurrentCountWallJumps = ++CurrentCountWallJumps;
+
+  			//Prediction stuff
+  			const UObject* WorldContextObject = GetWorld();
+  			FPredictProjectilePathParams& PredictParams = *new FPredictProjectilePathParams();
+  			PredictParams.StartLocation = CharacterOwner->GetTransform().GetLocation();
+  			PredictParams.LaunchVelocity = Velocity;
+  			TArray<AActor*> ActorsToIgnore = TArray<AActor*>();
+  			ActorsToIgnore.Add(CharacterOwner);
+  			PredictParams.ActorsToIgnore = ActorsToIgnore;
+			PredictParams.bTraceWithCollision = true;
+  			PredictParams.MaxSimTime = 2.0f;
+  			PredictParams.bTraceWithChannel = true;
+  			PredictParams.TraceChannel = ECC_WorldDynamic;
+  			PredictParams.SimFrequency = 40.0f;
+  			PredictParams.DrawDebugType = EDrawDebugTrace::ForDuration;
+  			PredictParams.DrawDebugTime = 1.0f;
+  			FPredictProjectilePathResult& PredictResult = *new FPredictProjectilePathResult();
+  			const float CapsuleHalfHeight = CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(); 
+  			const float CapsuleRadius = CharacterOwner->GetCapsuleComponent()->GetScaledCapsuleRadius();
+  			UExtBlueprintLibrary::PredictProjectilePathForCapsule(WorldContextObject, PredictParams, PredictResult,CapsuleHalfHeight, CapsuleRadius);
+
+  			WallJumpDuration = PredictResult.LastTraceDestination.Time;
+  			
+  			IsWallJumping = true;
+
+  			
+  			//cleanup
+  			delete &PredictParams;
+  			delete &PredictResult;
+  			
 			return true;
 		}
 	}

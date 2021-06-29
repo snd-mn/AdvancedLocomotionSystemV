@@ -61,5 +61,14 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API UExtCharacterMovementComponent : public UCha
 	FRotator leftRotator;
 	UPROPERTY()
 	FRotator rightRotator;
+
+	// shows how long the WallJump take to finish (predicted next hit event)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float WallJumpDuration;
+	//TODO do i realy need two bools for this shit?
+	UPROPERTY(BlueprintReadOnly)
+	bool IsWallJumping;
+	
+	
 	
 };

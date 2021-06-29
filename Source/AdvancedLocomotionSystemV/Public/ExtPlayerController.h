@@ -32,6 +32,6 @@ class ADVANCEDLOCOMOTIONSYSTEMV_API AExtPlayerController : public APlayerControl
 
 	//make some stuff like camera changes etc.
 	UFUNCTION(BlueprintImplementableEvent)
-	void OnTickWhileInWalljumpSate();
+	void OnTickWhileInWalljumpSate(float DeltaTime);
 	
 };
