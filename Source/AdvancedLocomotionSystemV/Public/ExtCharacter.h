@@ -23,11 +23,13 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
+
+public:
 	/** Movement component used for movement logic in various movement modes (walking, falling, etc), containing relevant settings and functions to control movement. */
 	UPROPERTY(Category=Character, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	UExtCharacterMovementComponent* ExtCharacterMovement;
-
-public:
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
